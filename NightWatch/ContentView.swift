@@ -7,37 +7,70 @@
 
 import SwiftUI
 
+let nighlyTasks = [
+    "Check all windows",
+    "Check all doors",
+    "Check that the safe is locked",
+    "Check the mailbox",
+    "Inspect security cameras",
+    "Clear ice from sidewalks",
+    "Document \"strange and unusual\" occurrences"
+]
+
+let weeklyTasks = [
+    "Check inside al vacant rooms",
+    "Walk the perimeter of the property"
+]
+
+let monthlyTasks = [
+    "Test security alarm",
+    "Test motion detectors",
+    "Test smoke alarms"
+]
+
 struct ContentView: View {
     var body: some View {
-        HStack {
-            VStack (alignment: .leading){
-                Text("\(Image(systemName: "moon.stars")) Nightly Tasks")
-                    .modifier(HeaderStyle())
-                Text("Check all windows")
-                Text("Check all doors")
-                Text("Check that the safe is locked")
-                Text("Inspect security cameras")
-                Text("Clear ice from sidewalks")
-                Text("Documents \"strange and unusual\" occurrences")
-                
-                Text("\(Image(systemName: "sunset")) Weekly Tasks")
-                    .headerStyle()
-                    .padding(.top)
-                Text("Check inside all vacant rooms")
-                Text("Walk the perimeter of property")
-                
-                Text(" \(Image(systemName: "calendar"))Monthly Tasks")
-                    .headerStyle()
-                    .padding(.top)
-                Text("Test security alarm")
-                Text("Test motion detectors")
-                Text("Test smoke alarms")
-                Spacer()
-            }
-            .foregroundStyle(.gray)
-            Spacer()
+        List {
+            Section (
+                content: {
+                    ForEach(nighlyTasks, id: \.self) {
+                        taskName in Text(taskName)
+                    }
+            },header: {
+                HStack {
+                    Image(systemName: "moon.stars")
+                    Text("Nighly Tasks")
+                }
+                .headerStyle()
+            })
+            
+            Section (
+                content: {
+                    ForEach(weeklyTasks, id: \.self) {
+                        taskName in Text(taskName)
+                    }
+            },header: {
+                HStack {
+                    Image(systemName: "sunset")
+                    Text("Weekly Tasks")
+                }
+                .headerStyle()
+            })
+            
+            Section (
+                content: {
+                    ForEach(monthlyTasks, id: \.self) {
+                        taskName in Text(taskName)
+                    }
+            },header: {
+                HStack {
+                    Image(systemName: "calendar")
+                    Text("Monthly Tasks")
+                }
+                .headerStyle()
+            })
         }
-        .padding(.all, 10.0)
+        .listStyle(GroupedListStyle())
     }
 }
 
@@ -47,7 +80,6 @@ struct HeaderStyle: ViewModifier {
             .font(.title3)
             .foregroundStyle(.yellow)
             .textCase(.uppercase)
-            .underline()
     }
 }
 
