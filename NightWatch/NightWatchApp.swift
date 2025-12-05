@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct NightWatchApp: App {
+    @State private var nightWatchViewModel = NightWatchViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(nightWatchViewModel: self.nightWatchViewModel)
         }
     }
 }
